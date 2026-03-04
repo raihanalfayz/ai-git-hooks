@@ -1,0 +1,190 @@
+# ============================================================================
+# AI Git Hooks Configuration
+# ============================================================================
+# Copy this file to .ai-hooks.yml in your project root and customize.
+#   cp .ai-hooks.example.yml .ai-hooks.yml
+#
+# Environment variables for API keys:
+#   export ANTHROPIC_API_KEY="sk-ant-..."    # For Claude
+#   export OPENAI_API_KEY="sk-..."           # For OpenAI
+#   export OLLAMA_HOST="http://localhost:11434"  # For Ollama (no key needed)
+# ============================================================================
+
+# --- AI Provider ---
+# Which AI provider to use: claude | openai | ollama
+provider: claude
+
+# Model to use (provider-specific).
+# Claude:  claude-sonnet-4-5-20250514, claude-haiku-35
+# OpenAI:  gpt-4o, gpt-4o-mini
+# Ollama:  llama3.1, codellama, mistral
+model: claude-sonnet-4-5-20250514
+
+# Maximum tokens the AI can return in a single response.
+# Higher values allow more detailed reviews but cost more.
+max_tokens: 1024
+
+# Request timeout in seconds. Increase for slower connections or Ollama.
+timeout: 30
+
+# --- Ollama-specific settings ---
+ollama:
+  # Host URL for the Ollama server.
+  host: "http://localhost:11434"
+
+# ============================================================================
+# Hook Configuration
+# ============================================================================
+
+hooks:
+
+  # --------------------------------------------------------------------------
+  # Pre-Commit: AI Code Review
+  # --------------------------------------------------------------------------
+  # Reviews staged changes for bugs, security issues, and anti-patterns.
+  pre-commit:
+    # Enable or disable this hook.
+    enabled: true
+
+    # Severity threshold: error | warn | info
+    #   error - Block commit on errors only (recommended)
+    #   warn  - Block commit on warnings and errors
+    #   info  - Block commit on any finding (strict)
+    severity: error
+
+    # Maximum number of staged files to review. Skips review if exceeded
+    # to avoid long wait times on large commits.
+    max_files: 20
+
+    # Maximum diff size in lines. Diffs larger than this are truncated
+    # before sending to the AI to stay within token limits.
+    max_diff_lines: 500
+
+    # File patterns to ignore (glob syntax). These files are excluded
+    # from AI review even if staged.
+    ignore:
+      - "*.lock"
+      - "*.min.js"
+      - "*.min.css"
+      - "*.map"
+      - "dist/**"
+      - "build/**"
+      - "node_modules/**"
+      - "*.generated.*"
+      - "package-lock.json"
+      - "yarn.lock"
+      - "pnpm-lock.yaml"
+
+    # Custom prompt to append to the AI review request.
+    # Use this to focus reviews on your project's specific concerns.
+    # Example: "Pay special attention to SQL injection and XSS vulnerabilities."
+    custom_prompt: ""
+
+  # --------------------------------------------------------------------------
+  # Prepare-Commit-Msg: Auto-Generate Commit Messages
+  # --------------------------------------------------------------------------
+  # Analyzes your diff and writes a commit message for you.
+  prepare-commit-msg:
+    # Enable or disable this hook.
+    enabled: true
+
+    # Commit message style: conventional | simple | detailed
+    #   conventional - "feat(scope): description" format
+    #   simple       - Brief one-line summary
+    #   detailed     - Summary + bullet-point body
+    style: conventional
+
+    # Auto-detect ticket number from branch name and prefix the message.
+    # Supports Jira (PROJ-123), Linear (PROJ-123), and GitHub (#123) formats.
+    # Example branch: feature/PROJ-42-add-login
+    # Result: "PROJ-42: feat(auth): add login functionality"
+    ticket_prefix: true
+
+    # Maximum length for the first line of the commit message.
+    max_length: 72
+
+    # Custom instruction for the AI when generating messages.
+    # Example: "Always include the component name in the scope."
+    custom_prompt: ""
+
+  # --------------------------------------------------------------------------
+  # Commit-Msg: Validate Commit Messages
+  # --------------------------------------------------------------------------
+  # Validates that your commit message follows conventions.
+  commit-msg:
+    # Enable or disable this hook.
+    enabled: true
+
+    # Convention to validate against: conventional | simple
+    #   conventional - Requires type(scope): description format
+    #   simple       - Just checks for minimum length and clarity
+    convention: conventional
+
+    # Maximum allowed length for the subject line.
+    max_length: 72
+
+    # Allowed type prefixes for conventional commits.
+    allowed_types:
+      - feat
+      - fix
+      - docs
+      - style
+      - refactor
+      - perf
+      - test
+      - build
+      - ci
+      - chore
+      - revert
+
+    # Whether to use AI to suggest a fix for invalid messages.
+    # If false, only shows the validation error without a suggestion.
+    suggest_fix: true
+
+  # --------------------------------------------------------------------------
+  # Pre-Push: Security Scan
+  # --------------------------------------------------------------------------
+  # Scans commits about to be pushed for secrets and vulnerabilities.
+  pre-push:
+    # Enable or disable this hook.
+    enabled: true
+
+    # Scan for hardcoded secrets (API keys, tokens, passwords).
+    scan_secrets: true
+
+    # Run dependency audit (npm audit / pip audit) before push.
+    scan_dependencies: true
+
+    # Maximum allowed file size. Files larger than this trigger a warning.
+    # Supports: B, KB, MB, GB suffixes.
+    max_file_size: "5MB"
+
+    # Additional regex patterns to scan for secrets.
+    # These are added on top of the built-in patterns.
+    custom_patterns: []
+    #   - name: "Internal API Token"
+    #     pattern: "internal_token_[a-zA-Z0-9]{32}"
+    #   - name: "Custom Secret"
+    #     pattern: "MY_SECRET=['\"][^'\"]+['\"]"
+
+    # File patterns to exclude from secret scanning (glob syntax).
+    ignore:
+      - "*.lock"
+      - "*.md"
+      - "*.txt"
+      - "test/**"
+      - "tests/**"
+      - "__tests__/**"
+      - "*.test.*"
+      - "*.spec.*"
+
+# ============================================================================
+# Global Settings
+# ============================================================================
+
+# Set to true to skip all AI API calls and use mock responses.
+# Useful for testing hook logic without burning API credits.
+dry_run: false
+
+# Enable verbose/debug output. Shows API requests and responses.
+debug: false

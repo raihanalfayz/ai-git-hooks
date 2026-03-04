@@ -1,0 +1,53 @@
+{
+  "name": "ai-git-hooks",
+  "version": "1.0.0",
+  "description": "AI-powered git hooks that review code, generate commit messages, catch bugs, and scan for security issues",
+  "author": "Sagar Gupta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sagargupta16/ai-git-hooks.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sagargupta16/ai-git-hooks/issues"
+  },
+  "homepage": "https://github.com/Sagargupta16/ai-git-hooks#readme",
+  "keywords": [
+    "git",
+    "hooks",
+    "ai",
+    "code-review",
+    "commit-messages",
+    "security",
+    "claude",
+    "openai",
+    "ollama",
+    "conventional-commits",
+    "pre-commit",
+    "devtools"
+  ],
+  "bin": {
+    "ai-git-hooks": "./scripts/install.sh"
+  },
+  "scripts": {
+    "install-hooks": "./scripts/install.sh",
+    "uninstall-hooks": "./scripts/uninstall.sh",
+    "test": "./scripts/test.sh",
+    "lint": "shellcheck hooks/**/*.sh scripts/*.sh"
+  },
+  "files": [
+    "hooks/",
+    "scripts/",
+    ".ai-hooks.example.yml",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ]
+}

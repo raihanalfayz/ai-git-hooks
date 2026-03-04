@@ -1,0 +1,114 @@
+name: Test Hooks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  shellcheck:
+    name: ShellCheck Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install ShellCheck
+        run: sudo apt-get install -y shellcheck
+
+      - name: Lint hook scripts
+        run: |
+          shellcheck -x hooks/pre-commit/ai-review.sh
+          shellcheck -x hooks/prepare-commit-msg/auto-message.sh
+          shellcheck -x hooks/commit-msg/validate.sh
+          shellcheck -x hooks/pre-push/security-scan.sh
+          shellcheck -x scripts/install.sh
+          shellcheck -x scripts/uninstall.sh
+          shellcheck -x scripts/test.sh
+
+  test-hooks:
+    name: Test Hooks (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          if command -v apt-get &>/dev/null; then
+            sudo apt-get update && sudo apt-get install -y jq
+          elif command -v brew &>/dev/null; then
+            brew install jq
+          fi
+
+      - name: Verify scripts are executable
+        run: |
+          chmod +x hooks/pre-commit/ai-review.sh
+          chmod +x hooks/prepare-commit-msg/auto-message.sh
+          chmod +x hooks/commit-msg/validate.sh
+          chmod +x hooks/pre-push/security-scan.sh
+          chmod +x scripts/install.sh
+          chmod +x scripts/uninstall.sh
+          chmod +x scripts/test.sh
+
+      - name: Run tests (dry-run mode)
+        env:
+          AI_HOOKS_DRY_RUN: "1"
+        run: ./scripts/test.sh
+
+  test-install:
+    name: Test Installation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Create test git repo
+        run: |
+          mkdir /tmp/test-project
+          cd /tmp/test-project
+          git init
+          git config user.email "test@example.com"
+          git config user.name "Test User"
+
+      - name: Make scripts executable
+        run: chmod +x scripts/*.sh hooks/**/*.sh
+
+      - name: Run install script
+        run: |
+          cd /tmp/test-project
+          "${{ github.workspace }}/scripts/install.sh" "${{ github.workspace }}"
+
+      - name: Verify hooks installed
+        run: |
+          test -f /tmp/test-project/.git/hooks/pre-commit
+          test -f /tmp/test-project/.git/hooks/prepare-commit-msg
+          test -f /tmp/test-project/.git/hooks/commit-msg
+          test -f /tmp/test-project/.git/hooks/pre-push
+          test -x /tmp/test-project/.git/hooks/pre-commit
+          echo "All hooks installed and executable"
+
+      - name: Run uninstall script
+        run: |
+          cd /tmp/test-project
+          "${{ github.workspace }}/scripts/uninstall.sh"
+
+      - name: Verify hooks removed
+        run: |
+          ! test -f /tmp/test-project/.git/hooks/pre-commit
+          ! test -f /tmp/test-project/.git/hooks/prepare-commit-msg
+          ! test -f /tmp/test-project/.git/hooks/commit-msg
+          ! test -f /tmp/test-project/.git/hooks/pre-push
+          echo "All hooks removed successfully"

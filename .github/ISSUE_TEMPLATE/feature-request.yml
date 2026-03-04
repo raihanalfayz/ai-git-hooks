@@ -1,0 +1,104 @@
+name: Feature Request
+description: Suggest a new feature or improvement for AI Git Hooks
+title: "[Feature]: "
+labels: ["enhancement"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement! Please describe your idea below.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Feature Area
+      description: Which part of the project does this relate to?
+      options:
+        - New hook
+        - pre-commit (AI Code Review)
+        - prepare-commit-msg (Auto Message)
+        - commit-msg (Validate)
+        - pre-push (Security Scan)
+        - New AI provider
+        - Configuration
+        - Installation / setup
+        - CLI / developer experience
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or Motivation
+      description: What problem does this feature solve? Why do you want it?
+      placeholder: |
+        I'm always frustrated when...
+        It would be helpful if...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe how you'd like this feature to work.
+      placeholder: |
+        The hook should...
+        The config option would look like...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Have you considered any alternative approaches?
+      placeholder: |
+        I also thought about...
+    validations:
+      required: false
+
+  - type: textarea
+    id: config-example
+    attributes:
+      label: Example Configuration
+      description: If this adds a config option, show what it would look like.
+      render: yaml
+      placeholder: |
+        hooks:
+          pre-commit:
+            new-option: value
+    validations:
+      required: false
+
+  - type: textarea
+    id: output-example
+    attributes:
+      label: Example Output
+      description: If applicable, show what the terminal output would look like.
+      render: shell
+    validations:
+      required: false
+
+  - type: dropdown
+    id: willing-to-contribute
+    attributes:
+      label: Would you be willing to contribute this feature?
+      options:
+        - "Yes, I'd like to submit a PR"
+        - "I could help with guidance"
+        - "No, I'm just suggesting"
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other information, screenshots, or links.
+    validations:
+      required: false
