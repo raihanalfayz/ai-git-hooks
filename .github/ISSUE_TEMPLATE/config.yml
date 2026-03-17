@@ -1,8 +1,0 @@
-blank_issues_enabled: true
-contact_links:
-  - name: Discussions
-    url: https://github.com/Sagargupta16/ai-git-hooks/discussions
-    about: Ask questions or start a discussion about AI Git Hooks
-  - name: Ollama Documentation
-    url: https://ollama.ai/docs
-    about: For Ollama-specific setup questions, check their docs

